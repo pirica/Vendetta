@@ -1,3 +1,4 @@
+import { ActivityType, PresenceUpdateStatus } from "discord.js";
 const { log } = require("../../funciones/funciones.js");
 const estructura = require('../../estructuras/esctructura');
 
@@ -12,6 +13,9 @@ module.exports = {
      */
     run: (_, client) => {
         log('Conectado como: ' + client.user.tag, 'completado');
-        client.user.setActivity('v0.0.1', { type: 'WATCHING' });
+        client.user.setPresence({
+            activities: [{ type: ActivityType.Custom, name: `v0.0.1 ✨` }],
+            status: PresenceUpdateStatus.Online
+        });
     }
 };
