@@ -1,4 +1,4 @@
-const { ActivityType, PresenceUpdateStatus } require('discord.js');
+const { ActivityType, PresenceUpdateStatus } = require('discord.js');
 const { log } = require("../../funciones/funciones.js");
 const estructura = require('../../estructuras/esctructura');
 
