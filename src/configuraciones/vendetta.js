@@ -68,7 +68,7 @@ const handler = {
  */
 const devs = {
   desarrolladores: [
-    "798527554368831528",
+    "345349877502574595",
     // Añade más IDs aquí siguiendo el mismo formato
   ],
 };
