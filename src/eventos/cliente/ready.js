@@ -1,4 +1,4 @@
-import { ActivityType, PresenceUpdateStatus } from "discord.js";
+const { ActivityType, PresenceUpdateStatus } from "discord.js";
 const { log } = require("../../funciones/funciones.js");
 const estructura = require('../../estructuras/esctructura');
 
