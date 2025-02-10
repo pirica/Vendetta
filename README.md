@@ -6,8 +6,7 @@ Vendetta es un bot enfocado en la API de Fortnite, diseñado con fines educativo
 ---
 
 ## 🔗 Links
-
-- [Invitar a Vendetta (oficial)](https://discord.com/oauth2/authorize?client_id=774043716797071371&permissions=277028620608&scope=applications.commands%20bot)  
+ 
 - [Servidor de soporte y ayuda](https://discord.gg/SnH6fVk8hJ)    
 
 ---
