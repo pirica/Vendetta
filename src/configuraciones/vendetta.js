@@ -10,6 +10,7 @@
 const tokenDiscord = process.env["tokenDiscord"];
 const MongoDB = process.env["mongoDB"];
 const canalErrores = process.env["canalErrores"];
+const servidorDesarollo = process.env["servidorDesarollo"];
 
 /**
  * Configuraciones del cliente
@@ -38,6 +39,7 @@ const client = {
  * @property {Object} mongodb - Configuración de MongoDB.
  * @property {string} mongodb.url - URL de MongoDB la puedes encontrar en => https://www.mongodb.com/es/atlas.
  * @property {boolean} mongodb.activado - Activar/desactivar MongoDB.
+ * @property {boolean} modoOficial - Activar/desactivar el modo oficial.
  */
 
 /**
@@ -56,6 +58,7 @@ const handler = {
     url: MongoDB,
     activado: true,
   },
+  modoOficial: true, // Cambia a true para activar el modo oficial
 };
 
 /**
@@ -68,7 +71,7 @@ const handler = {
  */
 const devs = {
   desarrolladores: [
-    "345349877502574595",
+    "798527554368831528",
     // Añade más IDs aquí siguiendo el mismo formato
   ],
 };
@@ -120,6 +123,7 @@ const mensajesPersonalizados = {
  */
 const canales = {
   canalErrores: canalErrores,
+  servidorDesarollo: servidorDesarollo,
 };
 
 // Exportar todas las configuraciones
