@@ -67,7 +67,7 @@ module.exports = {
             .setLabel('GitHub')
             .setEmoji('📂')
             .setStyle(ButtonStyle.Link)
-            .setURL('https://github.com/tu-repositorio');
+            .setURL('https://github.com/MyNameIsPako/Vendetta');
 
         // Crear una fila de acción con los botones
         const actionRow = new ActionRowBuilder().addComponents(boton1, boton2, boton3);

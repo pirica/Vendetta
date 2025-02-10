@@ -18,7 +18,7 @@ module.exports = {
   run: async (client, interaction) => {
     if (!interaction.isCommand()) return;
 
-    if (config.handler.modoOficial) {
+    if (config.handler.modoOficial && interaction.commandName !== 'ayuda') {
       const botonRepo = new ButtonBuilder()
         .setLabel('GitHub')
         .setEmoji('📂')
@@ -36,7 +36,7 @@ module.exports = {
       await interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setDescription("Este bot es de código abierto, por lo que no puedes usar ningún comando en modo oficial. Puedes clonar el repositorio y utilizarlo en tu propio servidor de Discord.\n\n> Estamos muy contentos de poder proporcionar un bot de código abierto para la comunidad hispana y poder enseñaros cómo funciona todo este sistema, ya que no hay documentación en español sobre ello.")
+            .setDescription("Este bot es de código abierto, por lo que no puedes usar ningún comando en modo oficial. Puedes clonar el repositorio y utilizarlo en tu propio servidor de Discord.\n\n> 🥰 Estamos muy contentos de poder proporcionar un bot de código abierto para la comunidad hispana y poder enseñaros cómo funciona todo este sistema, ya que no hay documentación en español sobre ello.")
             .setColor(Colors.DarkBlue)
         ],
         components: [actionRow],
