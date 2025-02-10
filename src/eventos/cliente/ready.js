@@ -12,8 +12,8 @@ module.exports = {
      */
     run: (_, client) => {
         log('Conectado como: ' + client.user.tag, 'completado');
-        client.user.setPresence({
-            activities: [{ name: `.gg/miabot | @mynameispako`, state: "test", type: "3" }]
+        client.user.setActivity({
+            activities: [{ name: `v0.0.1`, state: "test", type: "3" }]
         });
     }
 };
