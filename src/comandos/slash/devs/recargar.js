@@ -5,8 +5,8 @@ const {
     Colors
 } = require("discord.js");
 const ExtendedClient = require("../../../estructuras/esctructura");
-const cargarComandos = require("../../../handlers/comandos");
-const cargarEventos = require("../../../handlers/eventos");
+const cargarComandos = require("../../../handlers/funciones/comandos");
+const cargarEventos = require("../../../handlers/funciones/eventos");
 
 module.exports = {
     structure: new SlashCommandBuilder()

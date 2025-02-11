@@ -1,6 +1,6 @@
 const { readdirSync, statSync } = require("fs");
-const { log } = require("../funciones/funciones.js");
-const estructura = require("../estructuras/esctructura");
+const { log } = require("../../funciones/funciones.js");
+const estructura = require("../../estructuras/esctructura.js");
 const path = require("path");
 
 /**
@@ -8,7 +8,7 @@ const path = require("path");
  * @param {estructura} client - El cliente extendido de Discord.
  */
 module.exports = (client) => {
-  const rutaComponentes = path.join(__dirname, "..", "componentes");
+  const rutaComponentes = path.join(__dirname, "..", "..", "componentes");
 
   /**
    * Función recursiva para recorrer todas las subcarpetas y cargar los archivos de componentes.

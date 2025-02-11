@@ -1,7 +1,7 @@
 const { REST, Routes } = require("discord.js");
-const { log } = require("../funciones/funciones.js");
-const config = require("..//configuraciones/vendetta.js");
-const estructura = require("../estructuras/esctructura");
+const { log } = require("../../funciones/funciones.js");
+const config = require("../../configuraciones/vendetta.js");
+const estructura = require("../../estructuras/esctructura");
 
 /**
  * Cargar o recargar comandos de aplicación para el bot.

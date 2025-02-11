@@ -4,12 +4,12 @@ const {
   Collection,
   GatewayIntentBits,
 } = require("discord.js");
-const config = require("..//configuraciones/vendetta.js");
-const comandos = require("../handlers/comandos");
-const eventos = require("../handlers/eventos");
-const deploy = require("../handlers/deploy");
-const db = require("../handlers/mongo");
-const componentes = require("../handlers/componentes");
+const config = require("../configuraciones/vendetta.js");
+const comandos = require("../handlers/funciones/comandos.js");
+const eventos = require("../handlers/funciones/eventos.js");
+const deploy = require("../handlers/funciones/deploy.js");
+const db = require("../handlers/db/mongo");
+const componentes = require("../handlers/funciones/componentes.js");
 
 /**
  * Clase extendida del cliente de Discord.

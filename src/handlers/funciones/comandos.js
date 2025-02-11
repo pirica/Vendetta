@@ -1,6 +1,6 @@
 const { readdirSync, statSync } = require("fs");
-const { log } = require("../funciones/funciones.js");
-const estructura = require("../estructuras/esctructura");
+const { log } = require("../../funciones/funciones.js");
+const estructura = require("../../estructuras/esctructura");
 const path = require("path");
 
 /**
@@ -11,12 +11,12 @@ const registrarComandos = (client) => {
   /**
    * Primero borramos la cache.
    */
-  const ruta = path.join(__dirname, "..", "comandos");
+  const ruta = path.join(__dirname, "..", "..", "comandos");
   if (require.cache[ruta]) {
     delete require.cache[ruta];
   }
 
-  const comandosPath = path.join(__dirname, '..', 'comandos');
+  const comandosPath = path.join(__dirname, "..", "..", 'comandos');
 
   /**
    * Función recursiva para recorrer todas las subcarpetas y cargar los archivos de comandos.

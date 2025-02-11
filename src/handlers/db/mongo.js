@@ -1,6 +1,6 @@
 const { connect, Schema } = require("mongoose");
-const config = require("..//configuraciones/vendetta.js");
-const { log } = require("../funciones/funciones.js");
+const config = require("../../configuraciones/vendetta.js");
+const { log } = require("../../funciones/funciones.js");
 
 /**
  * Conectar a la base de datos MongoDB.

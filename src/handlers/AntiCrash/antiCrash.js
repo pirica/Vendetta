@@ -1,4 +1,4 @@
-const { logs } = require("../funciones/funciones.js");
+const { logs } = require("../../funciones/funciones.js");
 
 /**
  * AntiCrash para hacer que el bot no pete, creado y mejorado por @mynameispako.

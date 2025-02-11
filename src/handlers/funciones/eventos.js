@@ -1,6 +1,6 @@
 const { readdirSync, statSync } = require("fs");
-const { log } = require("../funciones/funciones.js");
-const esctructura = require("../estructuras/esctructura");
+const { log } = require("../../funciones/funciones.js");
+const esctructura = require("../../estructuras/esctructura");
 const path = require("path");
 
 /**
@@ -11,7 +11,7 @@ const registrarEventos = (client) => {
   /**
    * Definimos la ruta donde se encuentran los eventos
    */
-  const rutaEventos = path.join(__dirname, "..", "eventos");
+  const rutaEventos = path.join(__dirname, "..", "..", "eventos");
 
   /**
    * Función recursiva para recorrer todas las subcarpetas y cargar los archivos de eventos.
