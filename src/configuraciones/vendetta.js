@@ -49,16 +49,14 @@ const handler = {
   prefix: "r",
   deploy: true,
   comandos: {
-    prefix: false,
-    slash: true,
-    usuario: false,
-    mensaje: false,
+    prefix: true,
+    slash: true
   },
   mongodb: {
     url: MongoDB,
     activado: true,
   },
-  modoOficial: true, // Cambia a true para activar el modo oficial
+  modoOficial: false, // Cambia a true para activar el modo oficial
 };
 
 /**

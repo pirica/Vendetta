@@ -1,4 +1,4 @@
-const { readdirSync } = require("fs");
+const { readdirSync, statSync } = require("fs");
 const { log } = require("../funciones/funciones.js");
 const estructura = require("../estructuras/esctructura");
 const path = require("path");
@@ -10,74 +10,80 @@ const path = require("path");
 module.exports = (client) => {
   const rutaComponentes = path.join(__dirname, "..", "componentes");
 
-  for (const tipo of readdirSync(rutaComponentes)) {
-    for (const archivo of readdirSync(path.join(rutaComponentes, tipo)).filter(
-      (f) => f.endsWith(".js")
-    )) {
-      const modulo = path.join(rutaComponentes, tipo, archivo);
+  /**
+   * Función recursiva para recorrer todas las subcarpetas y cargar los archivos de componentes.
+   * @param {string} dir - El directorio actual.
+   */
+  const cargarComponentes = (dir) => {
+    for (const item of readdirSync(dir)) {
+      const itemPath = path.join(dir, item);
+      if (statSync(itemPath).isDirectory()) {
+        cargarComponentes(itemPath);
+      } else if (item.endsWith('.js')) {
+        const modulo = require(itemPath);
 
-      if (require.cache[modulo]) {
-        delete require.cache[modulo];
+        if (require.cache[itemPath]) {
+          delete require.cache[itemPath];
+        }
+
+        const moduloExtraido = require(itemPath);
+
+        if (!moduloExtraido) continue;
+
+        if (dir.includes('botones')) {
+          if (!moduloExtraido.customId || !moduloExtraido.run) {
+            log(
+              'Imposible cargar el componente ' +
+              item +
+              ' debido a que faltan propiedades.',
+              'advertencia'
+            );
+            continue;
+          }
+
+          client.collection.componentes.botones.set(
+            moduloExtraido.customId,
+            moduloExtraido
+          );
+        } else if (dir.includes('menus')) {
+          if (!moduloExtraido.customId || !moduloExtraido.run) {
+            log(
+              'Imposible cargar el selectMenu ' +
+              item +
+              ' debido a que faltan propiedades.',
+              'advertencia'
+            );
+            continue;
+          }
+
+          client.collection.componentes.menus.set(
+            moduloExtraido.customId,
+            moduloExtraido
+          );
+        } else if (dir.includes('modals')) {
+          if (!moduloExtraido.customId || !moduloExtraido.run) {
+            log(
+              'Imposible cargar el modal ' +
+              item +
+              ' debido a que faltan propiedades.',
+              'advertencia'
+            );
+            continue;
+          }
+
+          client.collection.componentes.modals.set(
+            moduloExtraido.customId,
+            moduloExtraido
+          );
+        } else {
+          log('Tipo de componente inválido: ' + item, 'advertencia');
+          continue;
+        }
+
+        log('Cargado nuevo componente: ' + item, 'informacion');
       }
-
-      const moduloExtraido = require(modulo);
-
-      if (!moduloExtraido) continue;
-
-      if (tipo === "botones") {
-        if (!moduloExtraido.customId || !moduloExtraido.run) {
-          log(
-            "Imposible cargar el componente " +
-            archivo +
-            " debido a que faltan propiedades.",
-            "advertencia"
-          );
-          continue;
-        }
-
-        client.collection.componentes.botones.set(
-          moduloExtraido.customId,
-          moduloExtraido
-        );
-      } else if (tipo === "menus") {
-        if (!moduloExtraido.customId || !moduloExtraido.run) {
-          log(
-            "Imposible cargar el selectMenu " +
-            archivo +
-            " debido a que faltan propiedades.",
-            "advertencia"
-          );
-          continue;
-        }
-
-        client.collection.componentes.menus.set(
-          moduloExtraido.customId,
-          moduloExtraido
-        );
-      } else if (tipo === "modals") {
-        if (!moduloExtraido.customId || !moduloExtraido.run) {
-          log(
-            "Imposible cargar el modal " +
-            archivo +
-            " debido a que faltan propiedades.",
-            "advertencia"
-          );
-          continue;
-        }
-
-        /**
-         * Añadimos el componente a la colección de modals
-         */
-        client.collection.componentes.modals.set(
-          moduloExtraido.customId,
-          moduloExtraido
-        );
-      } else {
-        log("Tipo de componente inválido: " + archivo, "advertencia");
-        continue;
-      }
-
-      log("Cargado nuevo componente: " + archivo, "informacion");
     }
-  }
+  };
+
+  cargarComponentes(rutaComponentes);
 };

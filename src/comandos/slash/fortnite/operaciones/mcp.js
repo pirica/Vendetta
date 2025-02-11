@@ -5,9 +5,9 @@ const {
   AttachmentBuilder,
   Colors
 } = require("discord.js");
-const ExtendedClient = require("../../../estructuras/esctructura");
-const { mcpRequest } = require("../../../funciones/funciones.js");
-const config = require('../../../configuraciones/vendetta.js');
+const ExtendedClient = require("../../../../estructuras/esctructura.js");
+const { mcpRequest } = require("../../../../funciones/funciones.js");
+const config = require('../../../../configuraciones/vendetta.js');
 
 module.exports = {
   structure: new SlashCommandBuilder()

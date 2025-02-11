@@ -1,6 +1,6 @@
 const { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Colors } = require('discord.js');
-const ExtendedClient = require('../../../estructuras/esctructura');
-const config = require('../../../configuraciones/vendetta.js');
+const ExtendedClient = require('../../../../estructuras/esctructura.js');
+const config = require('../../../../configuraciones/vendetta.js');
 
 module.exports = {
     structure: new SlashCommandBuilder()

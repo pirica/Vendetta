@@ -1,4 +1,4 @@
-const { ChannelType, Message, Colors } = require("discord.js");
+const { ChannelType, Message, EmbedBuilder, Colors } = require("discord.js");
 const config = require("../../configuraciones/vendetta.js");
 const { log } = require("../../funciones/funciones.js");
 const servidores = require("../../schemas/servidores");
@@ -17,6 +17,34 @@ module.exports = {
   run: async (client, message) => {
     if (message.author.bot || message.channel.type === ChannelType.DM) return;
     if (!config.handler.comandos.prefix) return;
+
+    if (config.handler.modoOficial && message.content !== `${config.handler.prefix}ayuda`) {
+      const botonRepo = new ButtonBuilder()
+        .setLabel('GitHub')
+        .setEmoji('📂')
+        .setStyle(ButtonStyle.Link)
+        .setURL('https://github.com/MyNameIsPako/Vendetta');
+
+      const botonSoporte = new ButtonBuilder()
+        .setLabel('Servidor de Soporte')
+        .setEmoji('🆘')
+        .setStyle(ButtonStyle.Link)
+        .setURL('https://discord.gg/miabot');
+
+      const actionRow = new ActionRowBuilder().addComponents(botonSoporte, botonRepo);
+
+      await message.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setDescription("Este bot es de código abierto, por lo que no puedes usar ningún comando en modo oficial. Puedes clonar el repositorio y utilizarlo en tu propio servidor de Discord.\n\n> 🥰 Estamos muy contentos de poder proporcionar un bot de código abierto para la comunidad hispana y poder enseñaros cómo funciona todo este sistema, ya que no hay documentación en español sobre ello.")
+            .setColor(Colors.DarkBlue)
+        ],
+        components: [actionRow],
+        ephemeral: true
+      });
+      return;
+    }
+
 
     let prefix = config.handler.prefix;
 

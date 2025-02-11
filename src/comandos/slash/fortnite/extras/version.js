@@ -1,5 +1,5 @@
 const { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder, Colors } = require('discord.js');
-const ExtendedClient = require('../../../estructuras/esctructura');
+const ExtendedClient = require('../../../../estructuras/esctructura');
 const axios = require('axios');
 
 module.exports = {

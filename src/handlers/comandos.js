@@ -1,4 +1,4 @@
-const { readdirSync } = require("fs");
+const { readdirSync, statSync } = require("fs");
 const { log } = require("../funciones/funciones.js");
 const estructura = require("../estructuras/esctructura");
 const path = require("path");
@@ -18,40 +18,31 @@ const registrarComandos = (client) => {
 
   const comandosPath = path.join(__dirname, '..', 'comandos');
 
-  // Recorremos cada tipo de comando (prefix, slash, etc.)
-  for (const tipo of readdirSync(comandosPath)) {
-    const tipoPath = path.join(comandosPath, tipo);
-
-    // Recorremos cada ruta dentro del tipo de comando
-    for (const ruta of readdirSync(tipoPath)) {
-      const rutaPath = path.join(tipoPath, ruta);
-
-      // Recorremos cada archivo dentro de la ruta
-      for (const archivo of readdirSync(rutaPath).filter((f) => f.endsWith('.js'))) {
-        const modulo = path.join(rutaPath, archivo);
-
-        /**
-         * Borramos la cache para el modulo especifico.
-         */
-        if (require.cache[modulo]) {
-          delete require.cache[modulo];
-        }
-
-        const moduloExtraido = require(modulo);
+  /**
+   * Función recursiva para recorrer todas las subcarpetas y cargar los archivos de comandos.
+   * @param {string} dir - El directorio actual.
+   */
+  const cargarComandos = (dir) => {
+    for (const item of readdirSync(dir)) {
+      const itemPath = path.join(dir, item);
+      if (statSync(itemPath).isDirectory()) {
+        cargarComandos(itemPath);
+      } else if (item.endsWith('.js')) {
+        const modulo = require(itemPath);
 
         /**
          * Si el módulo no se pudo cargar, continuamos con el siguiente
          */
-        if (!moduloExtraido) continue;
+        if (!modulo) continue;
 
-        if (tipo === 'prefix') {
+        if (dir.includes('prefix')) {
           /**
            * Verificamos que el módulo tenga las propiedades necesarias
            */
-          if (!moduloExtraido.structure?.name || !moduloExtraido.run) {
+          if (!modulo.structure?.name || !modulo.run) {
             log(
               'Imposible cargar el comando de la ruta ' +
-              archivo +
+              item +
               ' debido a que faltan propiedades en el comando.',
               'advertencia'
             );
@@ -62,21 +53,21 @@ const registrarComandos = (client) => {
            * Añadimos el comando a la colección de comandos con prefijo
            */
           client.collection.prefixComandos.set(
-            moduloExtraido.structure.name,
-            moduloExtraido
+            modulo.structure.name,
+            modulo
           );
 
           /**
            * Añadimos los alias del comando a la colección de alias
            */
           if (
-            moduloExtraido.structure.alias &&
-            Array.isArray(moduloExtraido.structure.alias)
+            modulo.structure.alias &&
+            Array.isArray(modulo.structure.alias)
           ) {
-            moduloExtraido.structure.alias.forEach((alias) => {
+            modulo.structure.alias.forEach((alias) => {
               client.collection.alias.set(
                 alias,
-                moduloExtraido.structure.name
+                modulo.structure.name
               );
             });
           }
@@ -84,10 +75,10 @@ const registrarComandos = (client) => {
           /**
            * Verificamos que el módulo tenga las propiedades necesarias
            */
-          if (!moduloExtraido.structure?.name || !moduloExtraido.run) {
+          if (!modulo.structure?.name || !modulo.run) {
             log(
               'Imposible cargar el comando de la ruta ' +
-              archivo +
+              item +
               ' debido a que faltan propiedades en el comando.',
               'advertencia'
             );
@@ -98,18 +89,24 @@ const registrarComandos = (client) => {
            * Añadimos el comando a la colección de comandos de interacción
            */
           client.collection.interactionComandos.set(
-            moduloExtraido.structure.name,
-            moduloExtraido
+            modulo.structure.name,
+            modulo
           );
-          client.applicationComandosArray.push(moduloExtraido.structure);
+          client.applicationComandosArray.push(modulo.structure);
         }
 
         /**
          * Registramos en el log que el comando se ha cargado correctamente
          */
-        log('Cargado/Refrescado comando: ' + archivo, 'info');
+        log('Cargado/Refrescado comando: ' + item, 'info');
       }
     }
+  };
+
+  // Recorremos cada tipo de comando (prefix, slash, etc.)
+  for (const tipo of readdirSync(comandosPath)) {
+    const tipoPath = path.join(comandosPath, tipo);
+    cargarComandos(tipoPath);
   }
 };
 

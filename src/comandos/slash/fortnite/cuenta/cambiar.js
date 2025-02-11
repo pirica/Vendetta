@@ -1,5 +1,5 @@
-const ExtendedClient = require('../../../estructuras/esctructura');
-const { ChatInputCommandInteraction, SlashCommandBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
+const ExtendedClient = require('../../../../estructuras/esctructura');
+const { ChatInputCommandInteraction, SlashCommandBuilder, StringSelectMenuBuilder, ActionRowBuilder, EmbedBuilder, Colors } = require('discord.js');
 
 module.exports = {
     structure: new SlashCommandBuilder()

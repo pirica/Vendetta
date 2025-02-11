@@ -1,8 +1,8 @@
 const { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, Colors } = require('discord.js');
-const ExtendedClient = require('../../../estructuras/esctructura');
+const ExtendedClient = require('../../../../estructuras/esctructura.js');
 const axios = require("axios");
-const config = require('../../../configuraciones/vendetta.js');
-const userInfo = require('../../../schemas/usuarioInfo');
+const config = require('../../../../configuraciones/vendetta.js');
+const userInfo = require('../../../../schemas/usuarioInfo.js');
 
 module.exports = {
     structure: new SlashCommandBuilder()
