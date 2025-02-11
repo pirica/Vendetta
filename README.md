@@ -1,4 +1,3 @@
-
 # Vendetta
 
 Vendetta es un bot enfocado en la API de Fortnite, diseñado con fines educativos para que cualquier persona pueda aprender y crear su primer bot. Dado que no existe mucha documentación en español sobre este tema, este bot busca llenar ese vacío y proporcionar una guía práctica. Con Vendetta, esperamos que los usuarios puedan aprender y lanzar su propio bot de manera efectiva.
@@ -63,7 +62,7 @@ canalErrores = ""
 
 ## 📋 Comandos
 
-- **Gestiona de la cuenta**: `registrar`, `cambiar`, `ver`, `skip`, `borrar` 
+- **Gestiona de la cuenta**: `registrar`, `cambiar`, `ver`, `borrar` 
 - **Devs**: `recargar`, `*prefix`, `*ping`
 - **Info**: `*ayuda`  
 
