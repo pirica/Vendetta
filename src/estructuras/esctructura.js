@@ -8,6 +8,7 @@ const config = require("../configuraciones/vendetta.js");
 const comandos = require("../handlers/funciones/comandos.js");
 const eventos = require("../handlers/funciones/eventos.js");
 const deploy = require("../handlers/funciones/deploy.js");
+const taxis = require("../handlers/TaxiBots/taxis.js");
 const db = require("../handlers/db/mongo");
 const componentes = require("../handlers/funciones/componentes.js");
 
@@ -70,6 +71,11 @@ module.exports = class extends Client {
      * Iniciar sesión en Discord
      */
     await this.login(process.env.tokenDiscord || config.client.token);
+
+    /**
+     * Registrar los taxis
+     */
+    taxis(this);
 
     /**
      * Desplegar comandos si está activado en la configuración
