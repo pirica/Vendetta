@@ -75,7 +75,7 @@ canalErrores = ""
 - [X] Sistema de TaxiBots
 - [X] BlackList 
 
-> 👀 Por el momento no voy a añadir nada mas a no ser que la gente quiera añadir algo o arreglar/mejorar lo que sea del bot, la intenacion del bot es poder tener una base para empezar.
+>  ⚠️ Por el momento no voy a añadir nada mas a no ser que la gente quiera añadir algo o arreglar/mejorar lo que sea del bot, la intenacion del bot es poder tener una base para empezar.
 
 ---
 
