@@ -64,13 +64,14 @@ canalErrores = ""
 
 - **Gestiona de la cuenta**: `registrar`, `cambiar`, `ver`, `borrar` 
 - **Devs**: `recargar`, `*prefix`, `*ping`
-- **Info**: `*ayuda`  
+- **Info**: `*ayuda`
+- **Extras**: `/version`
 
 > 💡 Los comandos con * tienen soporte para prefix
 
 ---
 
-## ⌛ En contruccion
+## 📄 Listado de sugerencias o nuevas cosas
 
 - [X] Sistema de TaxiBots
 - [X] BlackList 
