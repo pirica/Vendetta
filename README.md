@@ -72,10 +72,10 @@ canalErrores = ""
 
 ## ⌛ En contruccion
 
-- [ ] Sistema de TaxiBots
-- [ ] BlackList 
+- [X] Sistema de TaxiBots
+- [X] BlackList 
 
-> 👀 Estate atento al repo para ver cuando se actualiza el bot
+> 👀 Por el momento no voy a añadir nada mas a no ser que la gente quiera añadir algo o arreglar/mejorar lo que sea del bot, la intenacion del bot es poder tener una base para empezar.
 
 ---
 
