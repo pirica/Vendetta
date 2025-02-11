@@ -1,5 +1,6 @@
 const { readFile, writeFile } = require('fs').promises;
 const { log } = require("../../funciones/funciones.js");
+const config = require("../../configuraciones/vendetta.js");
 const { Client: taxi } = require('fnbr');
 let queue = [];
 
@@ -44,6 +45,16 @@ const isPrivado = false;
  * @param {estructura} client - El cliente extendido de Discord.
  */
 const TaxiBots = async (client) => {
+
+    /**
+     * vamos a añadir un sistema para desactivar esto
+     */
+    const isActivado = config.taxiBotsConfig.isActivado;
+
+    /**
+     * Si esto esta activado no se inician
+     */
+    if (isActivado) return;
 
     const taxiClient = new taxi({
         defaultStatus: "Iniciando bot...",

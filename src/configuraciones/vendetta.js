@@ -124,6 +124,16 @@ const canales = {
   servidorDesarollo: servidorDesarollo,
 };
 
+/**
+ * Configuración de activación de taxibots.
+ * @typedef {Object} TaxiBotsConfig
+ * @property {boolean} isActivo - Indica si los taxibots están activos.
+ * @type {TaxiBotsConfig}
+ */
+const taxiBotsConfig = {
+  isActivo: true,
+};
+
 // Exportar todas las configuraciones
 module.exports = {
   client,
@@ -132,4 +142,5 @@ module.exports = {
   servidorDesarrollo,
   mensajesPersonalizados,
   canales,
+  taxiBotsConfig
 };
