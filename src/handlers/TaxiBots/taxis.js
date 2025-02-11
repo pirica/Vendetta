@@ -1,7 +1,6 @@
 const { readFile, writeFile } = require('fs').promises;
 const { log } = require("../../funciones/funciones.js");
 const { Client: taxi } = require('fnbr');
-const path = require('path');
 let queue = [];
 
 /**
