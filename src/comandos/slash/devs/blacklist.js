@@ -5,7 +5,7 @@ const {
     Colors
 } = require("discord.js");
 const ExtendedClient = require("../../../estructuras/esctructura");
-const Usuario = require("../../../models/usuario");
+const Usuario = require("../../../schemas/usuarios");
 
 module.exports = {
     structure: new SlashCommandBuilder()
