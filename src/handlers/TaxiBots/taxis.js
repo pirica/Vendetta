@@ -170,7 +170,13 @@ const TaxiBots = async (client) => {
                     await request.decline();
                 } else {
                     queue.push(request.party.id);
+
+                    /*
+                    - Esto lo mismo dejo de ir
+                    
                     await taxiClient.sendFriendMessage(userId, "Actualmente esta la cola del bot llena, espera hasta que el bot se una a tu partida");
+                    */
+
                     log(`Añadido el usuario ${displayName} a la cola`, "informacion");
                 }
             } else {
