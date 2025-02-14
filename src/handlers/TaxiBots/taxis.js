@@ -96,6 +96,9 @@ const TaxiBots = async (client) => {
     function procesamientoCola() {
         taxiClient.setStatus(datosTaxis.ocupado);
 
+        /*
+        - Tengo que quitar esto por que la API de fortnite cambio y ya no es possible enviar mensajes directamente en el chat del juego.
+
         setTimeout(() => {
             taxiClient.party.sendMessage(datosTaxis.mensajeUnion).catch(() => ({}));
         }, 2000);
@@ -103,6 +106,7 @@ const TaxiBots = async (client) => {
         warnsTiempo = setTimeout(() => {
             taxiClient.party.sendMessage(datosTaxis.mensajeAdios).catch(() => ({}));
         }, datosTaxis.tiempo_para_irme * 60000);
+        */
 
         byeTiempo = setTimeout(async () => {
             if (queue.length > 1) {
