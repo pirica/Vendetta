@@ -5,7 +5,7 @@ const { Client: taxi } = require('fnbr');
 let queue = [];
 
 /**
- * Auth de la cuenta 
+ * Auth de la cuenta, esto lo podeis obtener con muchos bots pero logicamente te recomiendo el mio, te registras con la cuenta que quieras añadir aqui usando /registrar en Mia la puedes usar en discord.gg/miabot y una vez registrado te enviara por DM estas credenciales que tienes que poner aqui, si por algun motivo no te llega el mensaje usa /cuenta info y las veras.
  * @type {string}
  */
 const device = {
