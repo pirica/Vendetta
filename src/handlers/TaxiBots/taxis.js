@@ -93,23 +93,11 @@ const TaxiBots = async (client) => {
     /**
      * Procesa la cola de espera
      */
-    function procesamientoCola() {
+    async function procesamientoCola() {
         taxiClient.setStatus(datosTaxis.ocupado);
 
-        /*
-        - Tengo que quitar esto por que la API de fortnite cambio y ya no es possible enviar mensajes directamente en el chat del juego.
-
-        setTimeout(() => {
-            taxiClient.party.sendMessage(datosTaxis.mensajeUnion).catch(() => ({}));
-        }, 2000);
-
-        warnsTiempo = setTimeout(() => {
-            taxiClient.party.sendMessage(datosTaxis.mensajeAdios).catch(() => ({}));
-        }, datosTaxis.tiempo_para_irme * 60000);
-        */
-
         byeTiempo = setTimeout(async () => {
-            if (queue.length > 1) {
+            if (queue.length > 0) {
                 try {
                     await taxiClient.joinParty(queue[0]);
                     queue.shift();
@@ -169,15 +157,14 @@ const TaxiBots = async (client) => {
                     log(`${displayName} esta ya en la cola`, "informacion");
                     await request.decline();
                 } else {
-                    queue.push(request.party.id);
-
-                    /*
-                    - Esto lo mismo dejo de ir
-                    
-                    await taxiClient.sendFriendMessage(userId, "Actualmente esta la cola del bot llena, espera hasta que el bot se una a tu partida");
-                    */
-
-                    log(`Añadido el usuario ${displayName} a la cola`, "informacion");
+                    if (queue.length === 0) {
+                        await request.accept();
+                        log(`Se unio a la partida de ${request.party.leader.displayName}`, "informacion");
+                        procesamientoCola();
+                    } else {
+                        queue.push(request.party.id);
+                        log(`Añadido el usuario ${displayName} a la cola`, "informacion");
+                    }
                 }
             } else {
                 await request.accept();
@@ -208,7 +195,7 @@ const TaxiBots = async (client) => {
      * @param {Object} party - El objeto de la partida
      */
     taxiClient.on('party:member:kicked', async (party) => {
-        log(`Expulsado de la partida de ${kicked.displayName}`, "informacion");
+        log(`Expulsado de la partida de ${party.displayName}`, "informacion");
         try {
             if (party.id === taxiClient.user.id && queue.length > 0) {
                 clearTimeout(warnsTiempo);
