@@ -143,6 +143,7 @@ const TaxiBots = async (client) => {
     taxiClient.on('party:invite', async (request) => {
         const userId = request.sender.id;
         const displayName = request.sender.displayName;
+
         try {
             log(`Invitacion a partida recibida de ${displayName}`, "informacion");
 
@@ -152,43 +153,43 @@ const TaxiBots = async (client) => {
                 return;
             }
 
-            if (userId !== taxiClient.user.self.id) {
-                if (queue.includes(request.party.id)) {
-                    log(`${displayName} esta ya en la cola`, "informacion");
-                    await request.decline();
-                } else {
-                    if (queue.length === 0) {
-                        await request.accept();
-                        log(`Se unio a la partida de ${request.party.leader.displayName}`, "informacion");
-                        procesamientoCola();
-                    } else {
-                        queue.push(request.party.id);
-                        log(`Añadido el usuario ${displayName} a la cola`, "informacion");
-                    }
-                }
+            if (queue.includes(request.party.id)) {
+                log(`${displayName} esta ya en la cola`, "informacion");
+                await request.decline();
+                return;
+            }
+
+            if (queue.length === 0) {
+                await aceptarInvitacion(request);
             } else {
-                await request.accept();
-
-                /**
-                 * lo mas importante para enviar el patch que hara que aumente el poder
-                 */
-                setTimeout(async () => {
-                    const statsJSON = '{"FORTStats":{"fortitude":5797,"offense":5797,"resistance":5797,"tech":5797,"teamFortitude":5797,"teamOffense":0,"teamResistance":0,"teamTech":0,"fortitude_Phoenix":5797,"offense_Phoenix":5797,"resistance_Phoenix":5797,"tech_Phoenix":5797,"teamFortitude_Phoenix":0,"teamOffense_Phoenix":0,"teamResistance_Phoenix":0,"teamTech_Phoenix":0}}';
-
-                    try {
-                        await taxiClient.party?.me?.sendPatch({ "Default:FORTStats_j": statsJSON });
-                    } catch (error) {
-                        log(`Error al enviar Stats JSON error: ${error}`, "error");
-                    }
-                }, 1000);
-
-                procesamientoCola();
-                log(`Se unio a la partida de ${request.party.leader.displayName}`, "informacion");
+                queue.push(request.party.id);
+                log(`Añadido el usuario ${displayName} a la cola`, "informacion");
             }
         } catch (error) {
             log(`Error en el handler de (party:invite): ${error}`, "error");
         }
     });
+
+    /**
+     * Acepta la invitación a la partida y envía el patch para aumentar el poder.
+     * @param {Object} request - El objeto de la invitación a la partida
+     */
+    async function aceptarInvitacion(request) {
+        await request.accept();
+        log(`Se unio a la partida de ${request.party.leader.displayName}`, "informacion");
+
+        setTimeout(async () => {
+            const statsJSON = '{"FORTStats":{"fortitude":5797,"offense":5797,"resistance":5797,"tech":5797,"teamFortitude":5797,"teamOffense":0,"teamResistance":0,"teamTech":0,"fortitude_Phoenix":5797,"offense_Phoenix":5797,"resistance_Phoenix":5797,"tech_Phoenix":5797,"teamFortitude_Phoenix":0,"teamOffense_Phoenix":0,"teamResistance_Phoenix":0,"teamTech_Phoenix":0}}';
+
+            try {
+                await taxiClient.party?.me?.sendPatch({ "Default:FORTStats_j": statsJSON });
+            } catch (error) {
+                log(`Error al enviar Stats JSON error: ${error}`, "error");
+            }
+        }, 3000);
+
+        procesamientoCola();
+    }
 
     /**
      * Maneja la expulsión de miembros de la partida
