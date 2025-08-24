@@ -75,7 +75,7 @@ module.exports = class extends Client {
     /**
      * Registrar los taxis
      */
-    taxis(this);
+    if (config.taxiBotsConfig.isActivo) taxis(this);
 
     /**
      * Desplegar comandos si está activado en la configuración

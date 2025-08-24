@@ -50,13 +50,13 @@ const handler = {
   deploy: true,
   comandos: {
     prefix: true,
-    slash: true
+    slash: true,
   },
   mongodb: {
     url: MongoDB,
     activado: true,
   },
-  modoOficial: false, // Cambia a true para activar el modo oficial
+  modoOficial: true, // Cambia a true para activar el modo oficial
 };
 
 /**
@@ -131,7 +131,7 @@ const canales = {
  * @type {TaxiBotsConfig}
  */
 const taxiBotsConfig = {
-  isActivo: true,
+  isActivo: false,
 };
 
 // Exportar todas las configuraciones
@@ -142,5 +142,5 @@ module.exports = {
   servidorDesarrollo,
   mensajesPersonalizados,
   canales,
-  taxiBotsConfig
+  taxiBotsConfig,
 };
